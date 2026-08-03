@@ -7,6 +7,9 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PublicDashboardController;
+
+Route::get('/public-dashboard', [PublicDashboardController::class, 'index'])->name('public.dashboard');
 
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
@@ -55,4 +58,8 @@ Route::middleware('auth')->group(function () {
 
     // Lesson Plans
     Route::resource('lesson-plans', \App\Http\Controllers\LessonPlanController::class);
+
+    // Schedules
+    Route::get('schedules/view/timetable', [\App\Http\Controllers\ScheduleController::class, 'timetable'])->name('schedules.timetable');
+    Route::resource('schedules', \App\Http\Controllers\ScheduleController::class);
 });
